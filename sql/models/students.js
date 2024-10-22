@@ -16,7 +16,7 @@ const Student = sequelize.define('students', {
       len: [3, 10], 
     },
   },
-  emailid: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
@@ -42,7 +42,6 @@ const Student = sequelize.define('students', {
 // Define associations
 Student.hasMany(Course);
 Course.belongsTo(Student);
-
 
 Student.hasOne(Profile);
 Profile.belongsTo(Student);

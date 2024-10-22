@@ -9,12 +9,12 @@ async function sync() {
     await sequelize.sync({ force: true });
 
     const students = await Student.bulkCreate([
-      { name: "Sneha S", emailid: "snehasakthi02@gmail.com", age: 22 },
-      { name: "John Doe", emailid: "johndoe@gmail.com", age: 25 },
-      { name: "Priya", emailid: "priyae@gmail.com", age: 16 },
-      { name: "Sakthi", emailid: "sneha02@gmail.com", age: 25 },
-      { name: "Doe", emailid: "john@gmail.com", age: 26 },
-      { name: "Alexa", emailid: "priya@gmail.com", age: 27 },
+      { name: "Sneha S", email: "snehasakthi02@gmail.com", age: 22 },
+      { name: "John Doe", email: "johndoe@gmail.com", age: 25 },
+      { name: "Priya", email: "priyae@gmail.com", age: 16 },
+      { name: "Sakthi", email: "sneha02@gmail.com", age: 25 },
+      { name: "Doe", email: "john@gmail.com", age: 26 },
+      { name: "Alexa", email: "priya@gmail.com", age: 27 },
     ]);
     console.log("All students:", students);
 

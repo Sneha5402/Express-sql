@@ -66,7 +66,7 @@ module.exports = Student;
 //   try {
 //     await Student.create({
 //       name: 'John',
-//       emailid: 'john@example.com',
+//       email: 'john@example.com',
 //       age: 16, 
 //     });
 //   } catch (error) {

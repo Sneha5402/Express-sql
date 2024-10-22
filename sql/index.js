@@ -11,7 +11,7 @@ async function sync() {
     const students = await Student.bulkCreate([
       { name: "Sneha S", email: "snehasakthi02@gmail.com", age: 22 },
       { name: "John Doe", email: "johndoe@gmail.com", age: 25 },
-      { name: "Priya", email: "priyae@gmail.com", age: 16 },
+      { name: "Priya", email: "priyae@gmail.com", age: 20 },
       { name: "Sakthi", email: "sneha02@gmail.com", age: 25 },
       { name: "Doe", email: "john@gmail.com", age: 26 },
       { name: "Alexa", email: "priya@gmail.com", age: 27 },
@@ -31,7 +31,7 @@ async function sync() {
   for (const student of students) {
     await Profile.create({
       bio: `${student.name} is studying at their college.`,
-      avatar: `https://api.adorable.io/avatars/285/${student.emailid}`,
+      avatar: `https://api.adorable.io/avatars/285/${student.email}`,
       studentId: student.id, // Linking profile to student
     });
   }
@@ -99,19 +99,21 @@ async function sync() {
     // });
     // console.log("Student count by age:", studentss);
 
-    // // Joins
-    // const studentsWithStaff = await Student.findAll({
-    //   include: [
-    //     {
-    //       model: course,
-    //       attributes: ['Staff_name'],
-    //       required: true,
-    //     }
-    //   ],
-    //   attributes: ['id', 'name', 'emailid', 'age'],
-    // });
+  //   // Joins
+  //   const studentsWithStaff = await Student.findAll({
+  //     include: [
+  //       {
+  //         model: course,
+  //         attributes: ['Staff_name'],
+  //         required: true,
+  //       }
+  //     ],
+  //      attributes: {
+  //   exclude: ['age'], 
+  // },
+  //   });
 
-    // console.log(JSON.stringify(studentsWithStaff,null,2));
+  //   console.log(JSON.stringify(studentsWithStaff,null,2));
 
 
 

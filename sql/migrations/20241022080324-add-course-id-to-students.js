@@ -8,8 +8,8 @@ module.exports = {
                 model: 'courses',
                 key: 'id' 
             },
-            onUpdate: 'CASCADE',
-            onDelete: 'SET NULL', 
+            // onUpdate: 'CASCADE',
+            // onDelete: 'SET NULL', 
         });
     },
 

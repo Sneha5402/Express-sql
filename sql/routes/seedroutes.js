@@ -49,12 +49,12 @@ router.get('/students/:id', async (req, res) => {
 
 // Route to add a new student
 router.post('/students', async (req, res) => {
-    const { name, emailid, age } = req.body;
+    const { name, email, age } = req.body;
 
     try {
         const newStudent = await Student.create({
             name,
-            emailid,
+            email,
             age,
         });
         res.status(201).json(newStudent);
@@ -95,7 +95,7 @@ router.put('/students/:id', async (req, res) => {
 // Route to update a student by ID
 router.patch('/students/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, emailid, age } = req.body; // Fields to update
+    const { name, email, age } = req.body; // Fields to update
 
     try {
         const student = await Student.findByPk(id);
@@ -105,7 +105,7 @@ router.patch('/students/:id', async (req, res) => {
 
         await student.update({
             name: name || student.name,
-            emailid: emailid || student.emailid,
+            email: email || student.emailid,
             age: age || student.age,
         });
 

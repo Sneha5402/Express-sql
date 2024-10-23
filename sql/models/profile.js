@@ -24,7 +24,6 @@ const Profile = sequelize.define('profiles', {
     },
   },
 }, {
-  timestamps: true,
   paranoid: true,
 });
 

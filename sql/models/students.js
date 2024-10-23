@@ -35,7 +35,6 @@ const Student = sequelize.define('students', {
     defaultValue: 'MIT', 
   },
 }, {
-  timestamps: true,
   paranoid: true,
 });
 

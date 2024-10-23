@@ -28,7 +28,6 @@ const Course = sequelize.define('courses', {
     }
   },
 }, {
-  timestamps: true,
   paranoid: true, 
 });
 

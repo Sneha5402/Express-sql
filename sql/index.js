@@ -1,7 +1,7 @@
 const sequelize = require('./config/database')
 const Student = require('./models/students');
 const course = require('./models/courses');
-const Profile = require('./models/profile'); 
+const Profile = require('./models/profile');
 const { Op, fn, col } = require('sequelize');
 
 async function sync() {
@@ -26,17 +26,17 @@ async function sync() {
     ]);
     console.log("Courses created:", courseInstance);
 
-      
-  // Create profiles for each student
-  for (const student of students) {
-    await Profile.create({
-      bio: `${student.name} is studying at their college.`,
-      avatar: `https://api.adorable.io/avatars/285/${student.email}`,
-      studentId: student.id, // Linking profile to student
-    });
-  }
 
-  console.log("Profiles created successfully.");
+    // Create profiles for each student
+    for (const student of students) {
+      await Profile.create({
+        bio: `${student.name} is studying at their college.`,
+        avatar: `https://api.adorable.io/avatars/${student.email}`,
+        studentId: student.id, // Linking profile to student
+      });
+    }
+
+    console.log("Profiles created successfully.");
 
     // // table rename
     //     const rename= await sequelize.query('ALTER TABLE students RENAME TO newstudents');
@@ -99,21 +99,21 @@ async function sync() {
     // });
     // console.log("Student count by age:", studentss);
 
-  //   // Joins
-  //   const studentsWithStaff = await Student.findAll({
-  //     include: [
-  //       {
-  //         model: course,
-  //         attributes: ['Staff_name'],
-  //         required: true,
-  //       }
-  //     ],
-  //      attributes: {
-  //   exclude: ['age'], 
-  // },
-  //   });
+    //   // Joins
+    //   const studentsWithStaff = await Student.findAll({
+    //     include: [
+    //       {
+    //         model: course,
+    //         attributes: ['Staff_name'],
+    //         required: true,
+    //       }
+    //     ],
+    //      attributes: {
+    //   exclude: ['age'], 
+    // },
+    //   });
 
-  //   console.log(JSON.stringify(studentsWithStaff,null,2));
+    //   console.log(JSON.stringify(studentsWithStaff,null,2));
 
 
 
@@ -129,6 +129,31 @@ async function sync() {
     //   paranoid: false,
     // });
     // console.log("Soft deleted student found:", softDeletedStudent);
+
+
+    //  Fetch all students along with their associated courses and profiles
+    const studentsWithAssociations = await Student.findAll({
+      include: [
+        {
+          model: course,
+          attributes: ['course_name', 'Staff_name', 'marks'],
+        },
+        {
+          model: Profile,
+          attributes: ['bio', 'avatar'], 
+        }
+      ]
+    });
+    console.log("Students with courses and profiles:");
+    console.log(JSON.stringify(studentsWithAssociations, null, 2));
+
+    //  Fetch a specific student by ID with their profile
+    const studentWithProfile = await Student.findOne({
+      where: { id: students[1].id },
+      include: [{ model: Profile }]
+    });
+    console.log("Student with Profile:");
+    console.log(JSON.stringify(studentWithProfile, null, 2));
 
   } catch (error) {
     console.log(error);
@@ -148,16 +173,3 @@ sync();
 // }
 // console.log("All students:", dropAllTables);
 // dropAllTables();
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -34,9 +34,20 @@ const Student = sequelize.define('students', {
     allowNull: false,
     defaultValue: 'MIT', 
   },
+  token: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  tokenExpiresAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
 }, {
   paranoid: true,
+
+ 
 });
+
 
 // Define associations
 Student.hasMany(Course);

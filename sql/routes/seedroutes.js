@@ -76,16 +76,15 @@ router.put('/students/:id', async (req, res) => {
             return res.status(404).json({ message: 'Student not found' });
         }
 
-        // Update the student with new data
-        student.name = name ?? student.name;
-        student.age = age ?? student.age;
-        student.email = email ?? student.email;
-
-        // Save the updated student
-        await student.save();
+        // Update specific fields using the instance's update method
+        await student.update({
+            name: name || student.name,
+            email: email || student.email,
+            age: age || student.age,
+        });
 
         console.log('Updated Student:', student);
-        res.status(200).json(student); // Send the updated student
+        res.status(200).json(student); 
     } catch (error) {
         console.error('Error updating student:', error);
         res.status(500).json({ message: 'Failed to update student', error });
